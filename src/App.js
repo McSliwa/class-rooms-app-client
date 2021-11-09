@@ -1,11 +1,10 @@
-import './App.css';
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import {
   Button, Checkbox, Paper, AppBar, Toolbar, IconButton,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  TableFooter, TextField, InputAdornment, Typography
+  TableFooter, TextField, InputAdornment
 } from '@mui/material';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
@@ -14,6 +13,11 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import { unstable_styleFunctionSx } from '@mui/system';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import { useForm } from "react-hook-form";
+
+const Div = styled('div')(unstable_styleFunctionSx);
 
 const theme = createTheme({
   palette: {
@@ -28,12 +32,13 @@ const theme = createTheme({
 });
 
 const URL_API = 'https://localhost:5001/api/Classrooms'
+//const URL_API = 'https://89.71.112.170:6969/api/Classrooms'
 
 export default function App(props) {
   const [rooms, setRooms] = useState([]);
   const [newRoom, setNewRoom] = useState({});
   const [numSelected, setNumSelected] = useState(0);
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState(3);
 
   useEffect(() => {
     getClassroomsData();
@@ -92,38 +97,48 @@ export default function App(props) {
     setValue(newValue);
   };
 
+  const nextTab = (event) => {
+    const nextValue = value === 4 ? 1 : (value + 1);
+    setValue(nextValue);
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <Div sx={{ backgroundColor: '#282c34', minHeight: '100vh' }}>
         <TabContext value={value}>
           <AppBar component={Paper} variant='elevation' align='left' position="sticky" sx={{
-            p: 1, mb: 2, color: '#007ECC', fontWeight: 'bold',
+            p: 1, color: '#007ECC', fontWeight: 'bold',
             background: 'linear-gradient(45deg, #FFC87A 30%, #E69A2E 90%)'
           }}>
-            <Toolbar sx={{ ml: 3 }}>
-              <TabList onChange={handleChange} aria-label="lab API tabs example">
-                <Tab label="Searching" value="1" />
-                <Tab label="Reservatins" value="2" />
-                <Tab label="Classrooms" value="3" />
-                <Tab label="Equipment" value="4" />
+            <Toolbar>
+              <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+                <DoubleArrowIcon onClick={nextTab} />
+              </IconButton>
+              <TabList onChange={handleChange} aria-label="lab API tabs example"
+                sx={{ flexGrow: 1 }} variant='scrollable' scrollButtons='auto'
+                allowScrollButtonsMobile>
+                <Tab label="Searching" value={1} />
+                <Tab label="Reservatins" value={2} />
+                <Tab label="Classrooms" value={3} />
+                <Tab label="Equipment" value={4} />
               </TabList>
               <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar"
-                aria-haspopup="true" color="inherit" //onClick={handleMenu} 
+                aria-haspopup="true" color="inherit" edge='end' //onClick={handleMenu} 
               >
                 <AccountCircle />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <TabPanel value="1">
-            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">//TO DO</Paper>
+          <TabPanel value={1}>
+            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">TO DO</Paper>
           </TabPanel>
-          <TabPanel value="2">
-            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">//TO DO</Paper>
+          <TabPanel value={2}>
+            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">TO DO</Paper>
           </TabPanel>
-          <TabPanel value="3">
+          <TabPanel value={3}>
             <TableContainer component={Paper}>
-              <Table checboxSelection sx={{ minWidTableCell: 650 }}>
+              <Table checboxSelection sx={{ minWidTableCell: 850 }}>
                 <TableHead>
                   <TableRow>
                     <TableCell padding="checkbox">
@@ -163,7 +178,7 @@ export default function App(props) {
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
-                              <DialpadIcon />
+                              <DialpadIcon color='primary' />
                             </InputAdornment>)
                         }}
                         value={newRoom.classId}
@@ -175,7 +190,7 @@ export default function App(props) {
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
-                              <TextFieldsIcon />
+                              <TextFieldsIcon color='primary' />
                             </InputAdornment>)
                         }}
                         value={newRoom.className}
@@ -187,7 +202,7 @@ export default function App(props) {
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
-                              <TextFieldsIcon />
+                              <TextFieldsIcon color='primary' />
                             </InputAdornment>)
                         }}
                         value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
@@ -208,11 +223,11 @@ export default function App(props) {
               </Button>
             </Paper>
           </TabPanel>
-          <TabPanel value="4">
-            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">//TO DO</Paper>
+          <TabPanel value={4}>
+            <Paper elevation={24} sx={{ marginTop: 2, p: 3 }} align="left">TO DO</Paper>
           </TabPanel>
         </TabContext>
-      </div>
+      </Div>
     </ThemeProvider>
   );
 
