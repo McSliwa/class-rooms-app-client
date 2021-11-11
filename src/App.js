@@ -15,7 +15,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { unstable_styleFunctionSx } from '@mui/system';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import { useForm } from "react-hook-form";
+import Autocomplete from '@mui/material/Autocomplete';
+//import { useForm } from "react-hook-form";
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -150,6 +151,7 @@ export default function App(props) {
                     </TableCell>
                     <TableCell align="left" sx={{ fontWeight: 'bold', fontSize: 16 }}>Classroom Id</TableCell>
                     <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Type</TableCell>
                     <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Capacity</TableCell>
                   </TableRow>
                 </TableHead>
@@ -164,7 +166,8 @@ export default function App(props) {
                       </TableCell>
                       <TableCell align="left">{room.id}</TableCell>
                       <TableCell align="right">{room.name}</TableCell>
-                      <TableCell align="right">{room.capacity}</TableCell>
+                      <TableCell align="right" width='200'>{room.typeObject.typeName}</TableCell>
+                      <TableCell align="right" width='200'>{room.capacity}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
@@ -174,7 +177,7 @@ export default function App(props) {
                     </TableCell>
                     <TableCell>
                       <TextField id="outlined-basic" label='New Classroom id' variant="outlined"
-                        required size='small' margin="normal" fullWidth
+                        required size='small' fullWidth
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
@@ -186,7 +189,7 @@ export default function App(props) {
                     </TableCell>
                     <TableCell>
                       <TextField id="outlined-basic" label="Name" variant="outlined" required
-                        size='small' margin="normal" fullWidth
+                        size='small' fullWidth
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
@@ -197,8 +200,16 @@ export default function App(props) {
                         onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))} />
                     </TableCell>
                     <TableCell>
+                      <Autocomplete
+                        disablePortal size='small' fullWidth variant='outlined'
+                        id="combo-box-demo"
+                        options={['112654998','12654564','2365456']}
+                        renderInput={(params) => <TextField {...params} label="Type" />}
+                      />
+                    </TableCell>
+                    <TableCell>
                       <TextField id="outlined-basic" label="Capacity" variant="outlined" required
-                        size='small' margin="normal" fullWidth
+                        size='small' fullWidth
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
