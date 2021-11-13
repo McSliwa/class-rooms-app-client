@@ -32,21 +32,25 @@ const theme = createTheme({
   },
 });
 
-const URL_API = 'https://localhost:5001/api/Classrooms'
-//const URL_API = 'https://89.71.112.170:6969/api/Classrooms'
+const URL_BASE = 'https://localhost:5001/api'
+//const URL_BASE = 'https://89.71.112.170:6969/api'
+const URL_API_CLASS = `${URL_BASE}/Classrooms`
+const URL_API_TYPE = `${URL_BASE}/ClassroomType`
 
 export default function App(props) {
   const [rooms, setRooms] = useState([]);
-  const [newRoom, setNewRoom] = useState({});
+  const [newRoom, setNewRoom] = useState({ classId: "", className: "", classType: "", classCapacity: 0 });
   const [numSelected, setNumSelected] = useState(0);
-  const [value, setValue] = React.useState(3);
+  const [value, setValue] = useState(3);
+  const [classTypes, setClassTypes] = useState([]);
 
   useEffect(() => {
+    bindDictionary();
     getClassroomsData();
   }, []);
 
   const getClassroomsData = async () => {
-    const response = await Axios.get(URL_API, {
+    const response = await Axios.get(URL_API_CLASS, {
       headers: {
         'Access-ConTableRowol-Allow-Origin': true,
       },
@@ -54,20 +58,30 @@ export default function App(props) {
     setRooms(response.data.map((data) => ({ ...data, selected: false })));
   }
 
+  const bindDictionary = async () => {
+    const response = await Axios.get(URL_API_TYPE, {
+      headers: {
+        'Access-ConTableRowol-Allow-Origin': true,
+      },
+    });
+    setClassTypes(response.data.map((data) => ({ label: data.typeName, value: data.id })));
+  }
+
   const createClassroom = () => {
-    Axios.post(URL_API, {
+    Axios.post(URL_API_CLASS, {
       id: newRoom.classId,
       name: newRoom.className,
+      typeObjectId: classTypes.find(c => c.label === newRoom.classType).value,
       capacity: newRoom.classCapacity
     }).then((response) => {
       setRooms([...rooms, { ...response.data, selected: false }])
     });
-    setNewRoom({ classId: "", className: "", classCapacity: "" });
+    setNewRoom({ classId: "", className: "", classCapacity: 0, classType: "" });
   }
 
   const deleteClassroom = () => {
     rooms.filter(r => r.selected === true).forEach(rr => {
-      Axios.delete(`${URL_API}/${rr.id}`)
+      Axios.delete(`${URL_API_CLASS}/${rr.id}`)
         .then(() => { getClassroomsData(); });
     });
   }
@@ -110,7 +124,7 @@ export default function App(props) {
         <TabContext value={value}>
           <AppBar component={Paper} variant='elevation' align='left' position="sticky" sx={{
             p: 1, color: '#007ECC', fontWeight: 'bold',
-            background: 'linear-gradient(45deg, #FFC87A 30%, #E69A2E 90%)'
+            background: 'linear-gradient(45deg, #E69A2E 20%,#FFC87A 90%)'
           }}>
             <Toolbar>
               <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
@@ -120,7 +134,7 @@ export default function App(props) {
                 sx={{ flexGrow: 1 }} variant='scrollable' scrollButtons='auto'
                 allowScrollButtonsMobile>
                 <Tab label="Searching" value={1} />
-                <Tab label="Reservatins" value={2} />
+                <Tab label="Reservations" value={2} />
                 <Tab label="Classrooms" value={3} />
                 <Tab label="Equipment" value={4} />
               </TabList>
@@ -149,10 +163,10 @@ export default function App(props) {
                         onChange={handleSelectAllClick}
                       />
                     </TableCell>
-                    <TableCell align="left" sx={{ fontWeight: 'bold', fontSize: 16 }}>Classroom Id</TableCell>
-                    <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
-                    <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Type</TableCell>
-                    <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>Capacity</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Classroom Id</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Type</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Capacity</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -164,10 +178,10 @@ export default function App(props) {
                           onChange={(e) => { handleSelectClick(e, room) }}
                         />
                       </TableCell>
-                      <TableCell align="left">{room.id}</TableCell>
-                      <TableCell align="right">{room.name}</TableCell>
-                      <TableCell align="right" width='200'>{room.typeObject.typeName}</TableCell>
-                      <TableCell align="right" width='200'>{room.capacity}</TableCell>
+                      <TableCell width='300'>{room.id}</TableCell>
+                      <TableCell>{room.name}</TableCell>
+                      <TableCell width='300'>{room.typeObject.typeName}</TableCell>
+                      <TableCell width='300'>{room.capacity}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
@@ -203,8 +217,12 @@ export default function App(props) {
                       <Autocomplete
                         disablePortal size='small' fullWidth variant='outlined'
                         id="combo-box-demo"
-                        options={['112654998','12654564','2365456']}
-                        renderInput={(params) => <TextField {...params} label="Type" />}
+                        options={classTypes}
+                        value={newRoom.classType}
+                        onChange={(e) => setNewRoom(prevState => ({ ...prevState, classType: e.target.textContent }))}
+                        renderInput={(params) =>
+                          <TextField {...params} label="Type" value={newRoom.classType}
+                            onChange={(e) => setNewRoom(prevState => ({ ...prevState, classType: e.target.textContent }))} />}
                       />
                     </TableCell>
                     <TableCell>
@@ -213,7 +231,7 @@ export default function App(props) {
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
-                              <TextFieldsIcon color='primary' />
+                              <DialpadIcon color='primary' />
                             </InputAdornment>)
                         }}
                         value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
