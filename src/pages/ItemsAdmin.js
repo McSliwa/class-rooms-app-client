@@ -58,7 +58,7 @@ function ItemsAdmin(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell padding="checkbox">
-                                <Checkbox color="primary" inputProps={{ 'aria-label': 'select all desserts', }}
+                                <Checkbox color="primary"
                                     indeterminate={numSelected > 0 && numSelected < items.length}
                                     checked={items.length > 0 && numSelected === items.length}
                                     onChange={handleSelectAllClick}
@@ -90,7 +90,7 @@ function ItemsAdmin(props) {
                             <TableCell padding="checkbox"></TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label='New Item name' variant="outlined"
-                                    required size='small' fullwidth
+                                    required size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
@@ -103,7 +103,7 @@ function ItemsAdmin(props) {
                             </TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label="Quantity" variant="outlined" required
-                                    size='small' fullwidth
+                                    size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
@@ -116,7 +116,7 @@ function ItemsAdmin(props) {
                             </TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label="Description" variant="outlined" required
-                                    size='small' fullwidth
+                                    size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>

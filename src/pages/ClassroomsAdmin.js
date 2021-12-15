@@ -10,13 +10,18 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import Autocomplete from '@mui/material/Autocomplete';
 import { getApiConfig } from "../config/config.js";
 import { useAuth0 } from "@auth0/auth0-react";
+import ArrowDD from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import CancelIcon from '@mui/icons-material/Cancel';
 //import { useForm } from "react-hook-form";
 
 const configApi = getApiConfig();
 
 function ClassroomsAdmin(props) {
     const [allRooms, setAllRooms] = useState([]);
-    const [newRoom, setNewRoom] = useState({ classId: "", className: "", classType: "Standard", classCapacity: 0 });
+    const [newRoom, setNewRoom] = useState({
+        classId: "", className: "",
+        classType: "Standard", classCapacity: 0
+    });
     const [numSelected, setNumSelected] = useState(0);
     const [types, setTypes] = useState([]);
 
@@ -99,7 +104,7 @@ function ClassroomsAdmin(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell padding="checkbox">
-                                <Checkbox color="primary" inputProps={{ 'aria-label': 'select all desserts', }}
+                                <Checkbox color="primary"
                                     indeterminate={numSelected > 0 && numSelected < allRooms.length}
                                     checked={allRooms.length > 0 && numSelected === allRooms.length}
                                     onChange={handleSelectAllClick}
@@ -115,7 +120,7 @@ function ClassroomsAdmin(props) {
                         {allRooms.map(room =>
                             <TableRow key={room.id}>
                                 <TableCell padding="checkbox">
-                                    <Checkbox color="secondary" inputProps={{ 'aria-label': 'select all desserts', }}
+                                    <Checkbox color="secondary"
                                         checked={room.selected}
                                         onChange={(e) => { handleSelectClick(e, room) }}
                                     />
@@ -133,7 +138,7 @@ function ClassroomsAdmin(props) {
                             </TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label='New Classroom id' variant="outlined"
-                                    required size='small' fullwidth
+                                    required size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
@@ -141,12 +146,14 @@ function ClassroomsAdmin(props) {
                                             </InputAdornment>)
                                     }}
                                     value={newRoom.classId}
-                                    onChange={(event) => setNewRoom(prevState => ({ ...prevState, classId: event.target.value }))}
+                                    onChange={(event) => setNewRoom(prevState => ({
+                                        ...prevState, classId: event.target.value
+                                    }))}
                                 />
                             </TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label="Name" variant="outlined" required
-                                    size='small' fullwidth
+                                    size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
@@ -154,25 +161,30 @@ function ClassroomsAdmin(props) {
                                             </InputAdornment>)
                                     }}
                                     value={newRoom.className}
-                                    onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))}
+                                    onChange={(event) => setNewRoom(prevState => ({
+                                        ...prevState, className: event.target.value
+                                    }))}
                                 />
                             </TableCell>
                             <TableCell>
                                 <Autocomplete
-                                    disablePortal size='small' fullwidth variant='outlined'
-                                    id="combo-box-demo"
+                                    id="classrooms-types"
+                                    disablePortal size='small' fullWidth
+                                    popupIcon={<ArrowDD color='primary' fontSize='small' />}
+                                    clearIcon={<CancelIcon color='primary' fontSize='small' />}
                                     options={props.classTypes}
-                                    value={newRoom.classType}
-                                    onChange={(e) => setNewRoom(prevState => ({ ...prevState, classType: e.target.textContent }))}
+                                    inputValue={newRoom.classType}
+                                    onInputChange={(e, newValue) => {
+                                        setNewRoom(prevState => ({ ...prevState, classType: newValue }));
+                                    }}
+                                    isOptionEqualToValue={(option, value) => option.label === value.label}
                                     renderInput={(params) =>
-                                        <TextField {...params} label="Type" value={newRoom.classType}
-                                            onChange={(e) => setNewRoom(prevState => ({ ...prevState, classType: e.target.textContent }))}
-                                        />}
+                                        <TextField {...params} label="Typ" variant='outlined' />}
                                 />
                             </TableCell>
                             <TableCell>
                                 <TextField id="outlined-basic" label="Capacity" variant="outlined" required
-                                    size='small' fullwidth
+                                    size='small' fullWidth
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
@@ -180,7 +192,9 @@ function ClassroomsAdmin(props) {
                                             </InputAdornment>)
                                     }}
                                     value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
-                                    onChange={(event) => setNewRoom(prevState => ({ ...prevState, classCapacity: event.target.value }))}
+                                    onChange={(event) => setNewRoom(prevState => ({
+                                        ...prevState, classCapacity: event.target.value
+                                    }))}
                                 />
                             </TableCell>
                         </TableRow>

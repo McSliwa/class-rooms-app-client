@@ -47,12 +47,12 @@ function AppNavBar(props) {
             background: 'linear-gradient(45deg, #E69A2E 20%,#FFC87A 90%)'
         }}>
             <Toolbar>
-                <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}
+                <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}
                     onClick={nextTab}
                 >
                     <DoubleArrowIcon />
                 </IconButton>
-                <Tabs onChange={handleTabChange} aria-label="basic tabs example"
+                <Tabs onChange={handleTabChange}
                     sx={{ flexGrow: 1 }} variant='scrollable' scrollButtons='auto'
                     allowScrollButtonsMobile value={value}
                 >
@@ -66,8 +66,7 @@ function AppNavBar(props) {
                     isAuthenticated ?
                         (
                             <>
-                                <IconButton aria-label="account of current user" aria-controls="menu-appbar"
-                                    aria-haspopup="true" color="inherit" edge='end' size='large' sx={{ mr: 1 }}
+                                <IconButton color="inherit" edge='end' size='large' sx={{ mr: 1 }}
                                     onClick={logout}
                                 >
                                     <LogoutIcon sx={{ fontSize: 40 }} />
@@ -80,8 +79,7 @@ function AppNavBar(props) {
                             </>
                         ) :
                         (
-                            <IconButton aria-label="account of current user" aria-controls="menu-appbar"
-                                aria-haspopup="true" color="inherit" edge='end' size='large'
+                            <IconButton color="inherit" edge='end' size='large'
                                 onClick={loginWithRedirect}
                             >
                                 <AccountCircle sx={{ fontSize: 40 }} />

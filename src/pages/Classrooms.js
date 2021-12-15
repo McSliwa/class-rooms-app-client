@@ -26,7 +26,6 @@ function Classrooms(props) {
         capacity: 0, type: "Standard", equipment: ""
     });
     const [numSelected, setNumSelected] = useState(0);
-    const [newRoom, setNewRoom] = useState({ classId: "", className: "", classType: "", classCapacity: 0 });
 
     const getFilteredClassroomsData = async () => {
         const response = await Axios.get(configApi.classrooms, {
@@ -44,10 +43,10 @@ function Classrooms(props) {
         setFilteredRooms(response.data.map((data) => ({ ...data, selected: false })));
     }
 
-    const handleSelectClick = (event, room) => {
-        room.selected = event.target.checked;
+    const handleSelectClick = (e, room) => {
+        room.selected = e.target.checked;
         setFilteredRooms([...filteredRooms]);
-        if (event.target.checked) {
+        if (e.target.checked) {
             setNumSelected(numSelected + 1);
         }
         else {
@@ -55,8 +54,8 @@ function Classrooms(props) {
         }
     }
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
+    const handleSelectAllClick = (e) => {
+        if (e.target.checked) {
             setNumSelected(filteredRooms.length);
             setFilteredRooms(filteredRooms.map((room) => ({ ...room, selected: true })));
         }
@@ -78,43 +77,43 @@ function Classrooms(props) {
                                 value={filters.dateStart}
                                 onChange={(e) => setFilters(prevState => ({ ...prevState, dateStart: e }))}
                                 renderInput={(params) => <TextField size='small' {...params} />}
-                                ampm={false}
-                                mask='__.__._____ __:__'
+                                disableMaskedInput
                                 minDate={new Date(Date.now())}
                                 minDateTime={new Date(Date.now())}
-                                onError={console.log}
                             />
                         </Grid>
                         <Grid item xs={2} sm={4} md={4} key={2}>
                             <DateTimePicker OpenPickerButtonProps={{ color: 'primary' }}
-                                showTodayButton todayText='Now'
+                                showTodayButton todayText='Now' fullWidth
                                 label="Data i godzina zakończenia"
                                 value={filters.dateEnd}
                                 onChange={(e) => setFilters(prevState => ({ ...prevState, dateEnd: e }))}
                                 renderInput={(params) => <TextField size='small' {...params} />}
-                                ampm={false}
-                                mask='__.__._____ __:__'
+                                disableMaskedInput
                                 minDate={new Date(Date.now())}
                                 minDateTime={new Date(Date.now())}
-                                onError={console.log}
                             />
                         </Grid>
                     </LocalizationProvider>
                     <Grid item xs={2} sm={4} md={4} key={3}>
                         <Autocomplete
-                            disablePortal size='small'
+                            id="classrooms-types"
+                            disablePortal size='small' fullWidth
                             popupIcon={<ArrowDD color='primary' fontSize='small' />}
                             clearIcon={<CancelIcon color='primary' fontSize='small' />}
                             options={props.classTypes}
-                            value={filters.type}
-                            onChange={(e) => setFilters(prevState => ({ ...prevState, type: e.target.textContent }))}
-                            renderInput={(params) => <TextField {...params} label="Typ" value={filters.type} variant='outlined'
-                                onChange={(e) => setFilters(prevState => ({ ...prevState, type: e.target.textContent }))} />}
+                            inputValue={filters.type}
+                            onInputChange={(e, newValue) => {
+                                setFilters(prevState => ({ ...prevState, type: newValue }));
+                            }}
+                            isOptionEqualToValue={(option, value) => option.label === value.label}
+                            renderInput={(params) =>
+                                <TextField {...params} label="Typ" variant='outlined' />}
                         />
                     </Grid>
                     <Grid item xs={2} sm={4} md={4} key={4}>
                         <TextField id="outlined-basic" label="Minimalna pojemność" variant="outlined"
-                            size='small' sx={{ mr: 2, width: 150 }}
+                            size='small' sx={{ mr: 2 }} fullWidth
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position='end'>
@@ -126,15 +125,15 @@ function Classrooms(props) {
                     </Grid>
                     <Grid item xs={2} sm={4} md={4} key={5}>
                         <TextField id="outlined-basic" label="Wyposażenie" variant="outlined"
-                            size='small'
+                            size='small' fullWidth
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position='end'>
                                         <TextFieldsIcon color='primary' fontSize='small' />
                                     </InputAdornment>)
                             }}
-                            value={newRoom.className}
-                            onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))} />
+                            value={filters.equipment}
+                            onChange={(e) => setFilters(prevState => ({ ...prevState, equipment: e.target.value }))} />
                     </Grid>
                 </Grid>
             </Paper>
@@ -143,7 +142,7 @@ function Classrooms(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell padding="checkbox">
-                                <Checkbox color="primary" inputProps={{ 'aria-label': 'select all desserts', }}
+                                <Checkbox color="primary"
                                     indeterminate={numSelected > 0 && numSelected < filteredRooms.length}
                                     checked={filteredRooms.length > 0 && numSelected === filteredRooms.length}
                                     onChange={handleSelectAllClick} />
@@ -157,7 +156,7 @@ function Classrooms(props) {
                     <TableBody>
                         {filteredRooms.map(room => <TableRow key={room.id}>
                             <TableCell padding="checkbox">
-                                <Checkbox color="secondary" inputProps={{ 'aria-label': 'select all desserts', }}
+                                <Checkbox color="secondary"
                                     checked={room.selected}
                                     onChange={(e) => { handleSelectClick(e, room); }} />
                             </TableCell>
