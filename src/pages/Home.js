@@ -3,7 +3,7 @@ import React from 'react'
 
 function Home() {
     return (
-        <Paper elevation={24} sx={{ m: 2, p: 2 }} align="center">
+        <Paper elevation={24} sx={{ m: 1, p: 2 }} align="center">
             Witaj w aplikacji do wyszukiwania i zarządzania salami zajęciowymi.
         </Paper>
     )

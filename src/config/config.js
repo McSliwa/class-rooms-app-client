@@ -19,7 +19,9 @@ export const getApiConfig = () => {
     classrooms: base_url + configJson.API.URL_ALIAS_CLASSROOMS,
     types: base_url + configJson.API.URL_ALIAS_CLASSROOMS_TYPES,
     items: base_url + configJson.API.URL_ALIAS_ITEMS,
-    filtering: base_url + configJson.API.URL_ALIAS_CLASSROOMS_FILTERING
+    filtering: base_url + configJson.API.URL_ALIAS_CLASSROOMS + configJson.API.URL_ALIAS_CLASSROOMS_FILTERING,
+    reservations: base_url + configJson.API.URL_ALIAS_RESERVATIONS,
+    reservationsUserOnly: base_url + configJson.API.URL_ALIAS_RESERVATIONS + configJson.API.URL_ALIAS_RESERVATIONS_USER,
   }
 }
 

@@ -99,110 +99,112 @@ function ClassroomsAdmin(props) {
 
     return (
         <>
-            <TableContainer component={Paper}>
-                <Table checboxselection="true" sx={{ minWidTableCell: 850 }}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell padding="checkbox">
-                                <Checkbox color="primary"
-                                    indeterminate={numSelected > 0 && numSelected < allRooms.length}
-                                    checked={allRooms.length > 0 && numSelected === allRooms.length}
-                                    onChange={handleSelectAllClick}
-                                />
-                            </TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Classroom Id</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Type</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Capacity</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {allRooms.map(room =>
-                            <TableRow key={room.id}>
+            <Paper elevation={24} sx={{ p: 2, flexGrow: 1, m: 1 }}>
+                <TableContainer component={Paper}>
+                    <Table checboxselection="true" sx={{ minWidTableCell: 850 }}>
+                        <TableHead>
+                            <TableRow>
                                 <TableCell padding="checkbox">
-                                    <Checkbox color="secondary"
-                                        checked={room.selected}
-                                        onChange={(e) => { handleSelectClick(e, room) }}
+                                    <Checkbox color="primary"
+                                        indeterminate={numSelected > 0 && numSelected < allRooms.length}
+                                        checked={allRooms.length > 0 && numSelected === allRooms.length}
+                                        onChange={handleSelectAllClick}
                                     />
                                 </TableCell>
-                                <TableCell width='300'>{room.id}</TableCell>
-                                <TableCell>{room.name}</TableCell>
-                                <TableCell width='300'>{room.typeObject.typeName}</TableCell>
-                                <TableCell width='300'>{room.capacity}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Classroom Id</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Type</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Capacity</TableCell>
                             </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell padding="checkbox">
-                            </TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label='New Classroom id' variant="outlined"
-                                    required size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <DialpadIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                    value={newRoom.classId}
-                                    onChange={(event) => setNewRoom(prevState => ({
-                                        ...prevState, classId: event.target.value
-                                    }))}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label="Name" variant="outlined" required
-                                    size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <TextFieldsIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                    value={newRoom.className}
-                                    onChange={(event) => setNewRoom(prevState => ({
-                                        ...prevState, className: event.target.value
-                                    }))}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <Autocomplete
-                                    id="classrooms-types"
-                                    disablePortal size='small' fullWidth
-                                    popupIcon={<ArrowDD color='primary' fontSize='small' />}
-                                    clearIcon={<CancelIcon color='primary' fontSize='small' />}
-                                    options={props.classTypes}
-                                    inputValue={newRoom.classType}
-                                    onInputChange={(e, newValue) => {
-                                        setNewRoom(prevState => ({ ...prevState, classType: newValue }));
-                                    }}
-                                    isOptionEqualToValue={(option, value) => option.label === value.label}
-                                    renderInput={(params) =>
-                                        <TextField {...params} label="Typ" variant='outlined' />}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label="Capacity" variant="outlined" required
-                                    size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <DialpadIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                    value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
-                                    onChange={(event) => setNewRoom(prevState => ({
-                                        ...prevState, classCapacity: event.target.value
-                                    }))}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
-            <Paper elevation={24} sx={{ mt: 2, p: 3 }} align="left">
-                <Button variant="contained" color='primary' sx={{ ml: 4, mr: 2, color: '#FFFFFF' }}
+                        </TableHead>
+                        <TableBody>
+                            {allRooms.map(room =>
+                                <TableRow key={room.id}>
+                                    <TableCell padding="checkbox">
+                                        <Checkbox color="secondary"
+                                            checked={room.selected}
+                                            onChange={(e) => { handleSelectClick(e, room) }}
+                                        />
+                                    </TableCell>
+                                    <TableCell width='300'>{room.id}</TableCell>
+                                    <TableCell>{room.name}</TableCell>
+                                    <TableCell width='300'>{room.typeObject.typeName}</TableCell>
+                                    <TableCell width='300'>{room.capacity}</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TableCell padding="checkbox">
+                                </TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label='New Classroom id' variant="outlined"
+                                        required size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <DialpadIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                        value={newRoom.classId}
+                                        onChange={(event) => setNewRoom(prevState => ({
+                                            ...prevState, classId: event.target.value
+                                        }))}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label="Name" variant="outlined" required
+                                        size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <TextFieldsIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                        value={newRoom.className}
+                                        onChange={(event) => setNewRoom(prevState => ({
+                                            ...prevState, className: event.target.value
+                                        }))}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <Autocomplete
+                                        id="classrooms-types"
+                                        disablePortal size='small' fullWidth
+                                        popupIcon={<ArrowDD color='primary' fontSize='small' />}
+                                        clearIcon={<CancelIcon color='primary' fontSize='small' />}
+                                        options={props.classTypes}
+                                        inputValue={newRoom.classType}
+                                        onInputChange={(e, newValue) => {
+                                            setNewRoom(prevState => ({ ...prevState, classType: newValue }));
+                                        }}
+                                        isOptionEqualToValue={(option, value) => option.label === value.label}
+                                        renderInput={(params) =>
+                                            <TextField {...params} label="Typ" variant='outlined' />}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label="Capacity" variant="outlined" required
+                                        size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <DialpadIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                        value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
+                                        onChange={(event) => setNewRoom(prevState => ({
+                                            ...prevState, classCapacity: event.target.value
+                                        }))}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+            </Paper>
+            <Paper elevation={24} sx={{ m: 1, p: 2 }} align="left">
+                <Button variant="contained" color='primary' sx={{ mr: 2, color: '#FFFFFF' }}
                     onClick={createClassroom}>
                     Dodaj
                 </Button>

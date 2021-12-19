@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import {
-    Checkbox, Paper,
+    Checkbox, Paper, Button,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
     TableFooter, TextField, InputAdornment
 } from '@mui/material';
@@ -53,84 +53,102 @@ function ItemsAdmin(props) {
 
     return (
         <>
-            <TableContainer component={Paper}>
-                <Table checboxselection="true" sx={{ minWidTableCell: 850 }}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell padding="checkbox">
-                                <Checkbox color="primary"
-                                    indeterminate={numSelected > 0 && numSelected < items.length}
-                                    checked={items.length > 0 && numSelected === items.length}
-                                    onChange={handleSelectAllClick}
-                                />
-                            </TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Quantity</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Description</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {items.map(item =>
-                            <TableRow key={item.id}>
+            <Paper elevation={24} sx={{ p: 2, flexGrow: 1, m: 1 }}>
+                <TableContainer component={Paper}>
+                    <Table checboxselection="true" sx={{ minWidTableCell: 850 }}>
+                        <TableHead>
+                            <TableRow>
                                 <TableCell padding="checkbox">
-                                    <Checkbox color="secondary"
-                                        inputProps={{ 'aria-label': 'select all desserts', }}
-                                        checked={item.selected}
-                                        onChange={(e) => { handleSelectClick(e, item) }}
+                                    <Checkbox color="primary"
+                                        indeterminate={numSelected > 0 && numSelected < items.length}
+                                        checked={items.length > 0 && numSelected === items.length}
+                                        onChange={handleSelectAllClick}
                                     />
                                 </TableCell>
-                                <TableCell width='300'>{item.name}</TableCell>
-                                <TableCell width='300'>{item.quantity}</TableCell>
-                                <TableCell>{item.description}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Quantity</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Description</TableCell>
                             </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow sx={{ visibility: 'visible' }}>
-                            <TableCell padding="checkbox"></TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label='New Item name' variant="outlined"
-                                    required size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <TextFieldsIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                //value={newRoom.classId}
-                                //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classId: event.target.value }))}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label="Quantity" variant="outlined" required
-                                    size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <DialpadIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                //value={newRoom.className}
-                                //onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <TextField id="outlined-basic" label="Description" variant="outlined" required
-                                    size='small' fullWidth
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <TextFieldsIcon color='primary' />
-                                            </InputAdornment>)
-                                    }}
-                                //value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
-                                //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classCapacity: event.target.value }))}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                            {items.map(item =>
+                                <TableRow key={item.id}>
+                                    <TableCell padding="checkbox">
+                                        <Checkbox color="secondary"
+                                            inputProps={{ 'aria-label': 'select all desserts', }}
+                                            checked={item.selected}
+                                            onChange={(e) => { handleSelectClick(e, item) }}
+                                        />
+                                    </TableCell>
+                                    <TableCell width='300'>{item.name}</TableCell>
+                                    <TableCell width='300'>{item.quantity}</TableCell>
+                                    <TableCell>{item.description}</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow sx={{ visibility: 'visible' }}>
+                                <TableCell padding="checkbox"></TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label='New Item name' variant="outlined"
+                                        required size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <TextFieldsIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                    //value={newRoom.classId}
+                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classId: event.target.value }))}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label="Quantity" variant="outlined" required
+                                        size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <DialpadIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                    //value={newRoom.className}
+                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField id="outlined-basic" label="Description" variant="outlined" required
+                                        size='small' fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <TextFieldsIcon color='primary' />
+                                                </InputAdornment>)
+                                        }}
+                                    //value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
+                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classCapacity: event.target.value }))}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+            </Paper>
+            <Paper elevation={24} sx={{ m: 1, p: 2 }} align="left">
+                <Button
+                    variant="contained" color='primary'
+                    sx={{ mr: 2, color: '#FFFFFF' }}
+                //onClick={createClassroom}
+                >
+                    Dodaj
+                </Button>
+                <Button
+                    variant="contained" color='secondary'
+                    sx={{ mr: 2, color: '#FFFFFF' }}
+                //onClick={deleteClassroom}
+                >
+                    Usuń
+                </Button>
+            </Paper>
         </>
     )
 }

@@ -10,7 +10,9 @@
     "URL_ALIAS_CLASSROOMS": "/Classrooms",
     "URL_ALIAS_CLASSROOMS_TYPES": "/ClassroomType",
     "URL_ALIAS_ITEMS": "/Items",
-    "URL_ALIAS_CLASSROOMS_FILTERING": "/filtering"
+    "URL_ALIAS_CLASSROOMS_FILTERING": "/filtering",
+    "URL_ALIAS_RESERVATIONS": "/Reservations",
+    "URL_ALIAS_RESERVATIONS_USER": "/user"
   },
   "ROUTER": {
     "ALIAS_HOME": "/",
