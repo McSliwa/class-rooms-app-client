@@ -25,6 +25,16 @@ const theme = createTheme({
     secondary: {
       main: '#E69A2E',
     },
+  },
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        icon: {
+          color: '#2E9FE6',
+          fontSize: '22px'
+        }
+      }
+    }
   }
 });
 

@@ -3,20 +3,10 @@ import Axios from 'axios';
 import {
     Button, Checkbox, Paper,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    TextField, InputAdornment, Grid, FormControlLabel
+    Grid, FormControlLabel, Typography
 } from '@mui/material';
-import DialpadIcon from '@mui/icons-material/Dialpad';
-import TextFieldsIcon from '@mui/icons-material/TextFields';
-import ArrowDD from '@mui/icons-material/ArrowDropDownCircleOutlined';
-import Autocomplete from '@mui/material/Autocomplete';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { pl } from 'date-fns/locale';
 import { getApiConfig } from "../config/config.js";
 import { useAuth0 } from "@auth0/auth0-react";
-//import { useForm } from "react-hook-form";
 
 const configApi = getApiConfig();
 
@@ -91,13 +81,30 @@ function Reservations(props) {
         }
     }
 
+    const deleteReservation = async () => {
+        try {
+            const token = await getAccessTokenSilently();
+            reservations.filter(r => r.selected === true).forEach(rr => {
+                Axios.delete(`${configApi.reservations}/${rr.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Access-ConTableRowol-Allow-Origin': true,
+                    }
+                }).then(() => {
+                    getReservationsUserOnlyData();
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Paper elevation={24} sx={{ p: 2, flexGrow: 1, m: 1 }}>
                 <Grid container spacing={2}>
                     <Grid item md={3}>
                         <FormControlLabel label="Moje rezerwacje"
-
                             control={
                                 <Checkbox checked={onlyMyRes}
                                     onChange={handleCheckUserOnly}
@@ -106,13 +113,12 @@ function Reservations(props) {
                             } />
                     </Grid>
                     <Grid item md={3}>
-
                     </Grid>
                 </Grid>
             </Paper>
             <Paper elevation={24} sx={{ p: 2, flexGrow: 1, m: 1 }}>
                 <TableContainer component={Paper}>
-                    <Table checboxselection="true" sx={{ minWidTableCell: 850 }}>
+                    <Table checboxselection="true" sx={{ minWidTableCell: 500 }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell padding="checkbox">
@@ -143,13 +149,20 @@ function Reservations(props) {
                 </TableContainer>
             </Paper>
             <Paper elevation={24} sx={{ m: 1, p: 2 }} align="left">
-                <Button
-                    variant="contained" color='secondary'
-                    sx={{ mr: 2, color: '#FFFFFF' }}
-                //onClick={deleteClassroom}
-                >
-                    Usuń
-                </Button>
+                <Grid container spacing={2}>
+                    <Grid item md={3}>
+                        <Button
+                            variant="contained" color='secondary'
+                            sx={{ mr: 2, color: '#FFFFFF' }}
+                            onClick={deleteReservation}
+                            disabled={!onlyMyRes}
+                        >
+                            {!onlyMyRes ? 'Zaznacz "Moje rezerwacje", aby usunąć.' : 'Usuń'}
+                        </Button>
+                    </Grid>
+                    <Grid item md={3}>
+                    </Grid>
+                </Grid>
             </Paper>
         </>
     )

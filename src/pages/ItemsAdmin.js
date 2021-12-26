@@ -5,16 +5,22 @@ import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
     TableFooter, TextField, InputAdornment
 } from '@mui/material';
-import DialpadIcon from '@mui/icons-material/Dialpad';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
 import { getApiConfig } from "../config/config.js";
-//import { useForm } from "react-hook-form";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const configApi = getApiConfig();
 
 function ItemsAdmin(props) {
     const [items, setItems] = useState([]);
     const [numSelected, setNumSelected] = useState(0);
+    const [newItem, setNewItem] = useState({
+        name: '', description: ''
+    });
+
+    const {
+        getAccessTokenSilently,
+    } = useAuth0();
 
     useEffect(() => {
         getItemsData();
@@ -51,6 +57,49 @@ function ItemsAdmin(props) {
         }
     }
 
+    const createItem = async () => {
+        try {
+            const token = await getAccessTokenSilently();
+            await Axios.post(configApi.items, {
+                name: newItem.name,
+                description: newItem.description
+            },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Access-ConTableRowol-Allow-Origin': true,
+                    }
+                }).then((response) => {
+                    setItems([...items, { ...response.data, selected: false }])
+                }).catch((error) => {
+                    console.log(error);
+                });
+            setNewItem({ name: '', description: '' });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const deleteItems = async () => {
+        try {
+            const token = await getAccessTokenSilently();
+            items.filter(r => r.selected === true).forEach(rr => {
+                Axios.delete(`${configApi.items}/${rr.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Access-ConTableRowol-Allow-Origin': true,
+                    }
+                }).then(() => {
+                    getItemsData();
+                }).catch((error) => {
+                    console.log(error);
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Paper elevation={24} sx={{ p: 2, flexGrow: 1, m: 1 }}>
@@ -65,9 +114,8 @@ function ItemsAdmin(props) {
                                         onChange={handleSelectAllClick}
                                     />
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Name</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Quantity</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Description</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Nazwa</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>Opis</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -80,9 +128,8 @@ function ItemsAdmin(props) {
                                             onChange={(e) => { handleSelectClick(e, item) }}
                                         />
                                     </TableCell>
-                                    <TableCell width='300'>{item.name}</TableCell>
-                                    <TableCell width='300'>{item.quantity}</TableCell>
-                                    <TableCell>{item.description}</TableCell>
+                                    <TableCell width='200'>{item.name}</TableCell>
+                                    <TableCell width='400'>{item.description}</TableCell>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -90,7 +137,7 @@ function ItemsAdmin(props) {
                             <TableRow sx={{ visibility: 'visible' }}>
                                 <TableCell padding="checkbox"></TableCell>
                                 <TableCell>
-                                    <TextField id="outlined-basic" label='New Item name' variant="outlined"
+                                    <TextField id="outlined-basic" label='Nazwa nowego przedmiotu' variant="outlined"
                                         required size='small' fullWidth
                                         InputProps={{
                                             endAdornment: (
@@ -98,25 +145,12 @@ function ItemsAdmin(props) {
                                                     <TextFieldsIcon color='primary' />
                                                 </InputAdornment>)
                                         }}
-                                    //value={newRoom.classId}
-                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classId: event.target.value }))}
+                                        value={newItem.name}
+                                        onChange={(e) => setNewItem(prevState => ({ ...prevState, name: e.target.value }))}
                                     />
                                 </TableCell>
                                 <TableCell>
-                                    <TextField id="outlined-basic" label="Quantity" variant="outlined" required
-                                        size='small' fullWidth
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment position='end'>
-                                                    <DialpadIcon color='primary' />
-                                                </InputAdornment>)
-                                        }}
-                                    //value={newRoom.className}
-                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, className: event.target.value }))}
-                                    />
-                                </TableCell>
-                                <TableCell>
-                                    <TextField id="outlined-basic" label="Description" variant="outlined" required
+                                    <TextField id="outlined-basic" label="Opis" variant="outlined"
                                         size='small' fullWidth
                                         InputProps={{
                                             endAdornment: (
@@ -124,8 +158,8 @@ function ItemsAdmin(props) {
                                                     <TextFieldsIcon color='primary' />
                                                 </InputAdornment>)
                                         }}
-                                    //value={newRoom.classCapacity} InputLabelProps={{ shrink: true }}
-                                    //onChange={(event) => setNewRoom(prevState => ({ ...prevState, classCapacity: event.target.value }))}
+                                        value={newItem.description}
+                                        onChange={(e) => setNewItem(prevState => ({ ...prevState, description: e.target.value }))}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -133,20 +167,28 @@ function ItemsAdmin(props) {
                     </Table>
                 </TableContainer>
             </Paper>
-            <Paper elevation={24} sx={{ m: 1, p: 2 }} align="left">
+            <Paper elevation={24} sx={{ m: 1, p: 2, pl: 10 }} align="left">
                 <Button
                     variant="contained" color='primary'
                     sx={{ mr: 2, color: '#FFFFFF' }}
-                //onClick={createClassroom}
+                    onClick={createItem}
                 >
                     Dodaj
                 </Button>
                 <Button
                     variant="contained" color='secondary'
                     sx={{ mr: 2, color: '#FFFFFF' }}
-                //onClick={deleteClassroom}
+                    onClick={deleteItems}
                 >
                     Usuń
+                </Button>
+                <Button
+                    variant="contained" color='primary'
+                    sx={{ mr: 2, color: '#FFFFFF' }}
+                    disabled={numSelected !== 1}
+                //onClick={createClassroom}
+                >
+                    Edytuj
                 </Button>
             </Paper>
         </>
