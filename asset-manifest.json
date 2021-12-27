@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/class-rooms-app-client/static/css/main.c5caff74.chunk.css",
-    "main.js": "/class-rooms-app-client/static/js/main.2bf4203c.chunk.js",
-    "main.js.map": "/class-rooms-app-client/static/js/main.2bf4203c.chunk.js.map",
-    "runtime-main.js": "/class-rooms-app-client/static/js/runtime-main.9ff8f610.js",
-    "runtime-main.js.map": "/class-rooms-app-client/static/js/runtime-main.9ff8f610.js.map",
+    "main.js": "/class-rooms-app-client/static/js/main.de1958fb.chunk.js",
+    "main.js.map": "/class-rooms-app-client/static/js/main.de1958fb.chunk.js.map",
+    "runtime-main.js": "/class-rooms-app-client/static/js/runtime-main.50398981.js",
+    "runtime-main.js.map": "/class-rooms-app-client/static/js/runtime-main.50398981.js.map",
     "static/css/2.e6c1e8c5.chunk.css": "/class-rooms-app-client/static/css/2.e6c1e8c5.chunk.css",
-    "static/js/2.4a098f54.chunk.js": "/class-rooms-app-client/static/js/2.4a098f54.chunk.js",
-    "static/js/2.4a098f54.chunk.js.map": "/class-rooms-app-client/static/js/2.4a098f54.chunk.js.map",
-    "static/js/3.62eaa237.chunk.js": "/class-rooms-app-client/static/js/3.62eaa237.chunk.js",
-    "static/js/3.62eaa237.chunk.js.map": "/class-rooms-app-client/static/js/3.62eaa237.chunk.js.map",
+    "static/js/2.b0e53dc0.chunk.js": "/class-rooms-app-client/static/js/2.b0e53dc0.chunk.js",
+    "static/js/2.b0e53dc0.chunk.js.map": "/class-rooms-app-client/static/js/2.b0e53dc0.chunk.js.map",
+    "static/js/3.3fbdce8c.chunk.js": "/class-rooms-app-client/static/js/3.3fbdce8c.chunk.js",
+    "static/js/3.3fbdce8c.chunk.js.map": "/class-rooms-app-client/static/js/3.3fbdce8c.chunk.js.map",
     "index.html": "/class-rooms-app-client/index.html",
     "static/css/2.e6c1e8c5.chunk.css.map": "/class-rooms-app-client/static/css/2.e6c1e8c5.chunk.css.map",
     "static/css/main.c5caff74.chunk.css.map": "/class-rooms-app-client/static/css/main.c5caff74.chunk.css.map",
-    "static/js/2.4a098f54.chunk.js.LICENSE.txt": "/class-rooms-app-client/static/js/2.4a098f54.chunk.js.LICENSE.txt"
+    "static/js/2.b0e53dc0.chunk.js.LICENSE.txt": "/class-rooms-app-client/static/js/2.b0e53dc0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9ff8f610.js",
+    "static/js/runtime-main.50398981.js",
     "static/css/2.e6c1e8c5.chunk.css",
-    "static/js/2.4a098f54.chunk.js",
+    "static/js/2.b0e53dc0.chunk.js",
     "static/css/main.c5caff74.chunk.css",
-    "static/js/main.2bf4203c.chunk.js"
+    "static/js/main.de1958fb.chunk.js"
   ]
 }
