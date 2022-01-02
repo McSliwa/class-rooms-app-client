@@ -21,7 +21,7 @@ function ClassroomsAdmin(props) {
     const [allRooms, setAllRooms] = useState([]);
     const [newRoom, setNewRoom] = useState({
         classId: "", className: "",
-        classType: "Standard", classCapacity: 0
+        classType: "", classCapacity: 0
     });
     const [numSelected, setNumSelected] = useState(0);
     const [types, setTypes] = useState([]);

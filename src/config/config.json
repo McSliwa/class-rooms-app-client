@@ -6,7 +6,7 @@
   },
   "API": {
     "URL_BASE_DEV": "https://localhost:5001/api",
-    "URL_BASE_PROD": "https://89.71.112.170:6969/api",
+    "URL_BASE_PROD": "https://classrooms-client.azurewebsites.net/api",
     "URL_ALIAS_CLASSROOMS": "/Classrooms",
     "URL_ALIAS_CLASSROOMS_TYPES": "/ClassroomType",
     "URL_ALIAS_ITEMS": "/Items",
@@ -16,6 +16,7 @@
   },
   "ROUTER": {
     "ALIAS_HOME": "/",
+    "ALIAS_HOME_PROD": "/class-rooms-app-client",
     "ALIAS_CLASSROOMS_VIEW": "/classrooms",
     "ALIAS_RESERVATIONS": "/reservations",
     "ALIAS_CLASSROOMS_ADMIN": "/adm-classrooms",

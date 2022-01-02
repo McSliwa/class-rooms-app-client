@@ -51,7 +51,7 @@ function App() {
         'Access-ConTableRowol-Allow-Origin': true,
       },
     });
-    setClassTypes(response.data.map((data) => ({ label: data.typeName, value: data.id })));
+    setClassTypes(response.data.map((data) => ({ label: data.labelLangPl, value: data.id })));
   }
 
   return (

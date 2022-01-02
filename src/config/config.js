@@ -27,7 +27,7 @@ export const getApiConfig = () => {
 
 export const getRouterConfig = () => {
   return {
-    aliasHome: configJson.ROUTER.ALIAS_HOME,
+    aliasHome: process.env.NODE_ENV === 'production' ? configJson.ROUTER.ALIAS_HOME_PROD : configJson.ROUTER.ALIAS_HOME,
     aliasClassrooms: configJson.ROUTER.ALIAS_CLASSROOMS_VIEW,
     aliasReservations: configJson.ROUTER.ALIAS_RESERVATIONS,
     aliasItemsAdm: configJson.ROUTER.ALIAS_ITEMS_ADMIN,
