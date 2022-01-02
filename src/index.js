@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './utils/reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
-import { getAuthConfig, getRouterConfig } from "./config/config.js";
+import { getAuthConfig } from "./config/config.js";
 import history from "./utils/history.js";
 import * as serviceWorker from "./utils/serviceWorker.js";
 
@@ -16,13 +16,12 @@ const onRedirectCallback = (appState) => {
 };
 
 const config = getAuthConfig();
-const configRouter = getRouterConfig();
 
 const providerConfig = {
   domain: config.domain,
   clientId: config.clientId,
   ...(config.audience ? { audience: config.audience } : null),
-  redirectUri: configRouter.aliasHome,
+  redirectUri: window.location.href,
   onRedirectCallback,
 };
 

@@ -15,8 +15,8 @@
     "URL_ALIAS_RESERVATIONS_USER": "/user"
   },
   "ROUTER": {
+    "ALIAS_PROD": "/class-rooms-app-client",
     "ALIAS_HOME": "/",
-    "ALIAS_HOME_PROD": "/class-rooms-app-client",
     "ALIAS_CLASSROOMS_VIEW": "/classrooms",
     "ALIAS_RESERVATIONS": "/reservations",
     "ALIAS_CLASSROOMS_ADMIN": "/adm-classrooms",

@@ -26,12 +26,13 @@ export const getApiConfig = () => {
 }
 
 export const getRouterConfig = () => {
+  const base_alias = process.env.NODE_ENV === 'production' ? configJson.ROUTER.ALIAS_PROD : '';
   return {
-    aliasHome: process.env.NODE_ENV === 'production' ? configJson.ROUTER.ALIAS_HOME_PROD : configJson.ROUTER.ALIAS_HOME,
-    aliasClassrooms: configJson.ROUTER.ALIAS_CLASSROOMS_VIEW,
-    aliasReservations: configJson.ROUTER.ALIAS_RESERVATIONS,
-    aliasItemsAdm: configJson.ROUTER.ALIAS_ITEMS_ADMIN,
-    aliasClassroomsAdm: configJson.ROUTER.ALIAS_CLASSROOMS_ADMIN
+    aliasHome: base_alias + configJson.ROUTER.ALIAS_HOME,
+    aliasClassrooms: base_alias + configJson.ROUTER.ALIAS_CLASSROOMS_VIEW,
+    aliasReservations: base_alias + configJson.ROUTER.ALIAS_RESERVATIONS,
+    aliasItemsAdm: base_alias + configJson.ROUTER.ALIAS_ITEMS_ADMIN,
+    aliasClassroomsAdm: base_alias + configJson.ROUTER.ALIAS_CLASSROOMS_ADMIN
   }
 }
 
