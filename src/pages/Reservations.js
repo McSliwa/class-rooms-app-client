@@ -3,7 +3,7 @@ import Axios from 'axios';
 import {
     Button, Checkbox, Paper,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    Grid, FormControlLabel, Typography
+    Grid, FormControlLabel
 } from '@mui/material';
 import { getApiConfig } from "../config/config.js";
 import { useAuth0 } from "@auth0/auth0-react";

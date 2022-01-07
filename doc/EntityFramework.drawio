@@ -1,0 +1,52 @@
+<mxfile host="65bd71144e">
+    <diagram id="0dPm1q8OjL4Xk8YKQzQf" name="Page-1">
+        <mxGraphModel dx="2076" dy="937" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" background="none" math="0" shadow="1">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-3" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="170" y="113.5" as="sourcePoint"/>
+                        <mxPoint x="240" y="113.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-4" value="&lt;b&gt;Entity Framework&lt;br&gt;Core&lt;br&gt;&lt;/b&gt;" style="html=1;dashed=0;whitespace=wrap;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="89" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-6" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="368.5" y="113.5" as="sourcePoint"/>
+                        <mxPoint x="438.5" y="113.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-8" value="&lt;b&gt;Entity Framework&lt;br&gt;Core&lt;br&gt;&lt;/b&gt;" style="html=1;dashed=0;whitespace=wrap;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="199" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-9" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="369" y="223.5" as="sourcePoint"/>
+                        <mxPoint x="439" y="223.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-10" value="&lt;b&gt;Klasy modelu&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="194" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-11" value="&lt;b&gt;Kontekst bazy danych i klas modelu&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="84" width="135" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="170" y="223.5" as="sourcePoint"/>
+                        <mxPoint x="240" y="223.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-13" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/databases/Azure_Database_PostgreSQL_Server.svg;" parent="1" vertex="1">
+                    <mxGeometry x="112" y="80" width="48" height="64" as="geometry"/>
+                </mxCell>
+                <mxCell id="Gj9s0sQxeKsyC-4yZC71-14" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/databases/Azure_Database_PostgreSQL_Server.svg;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="185" width="48" height="64" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
