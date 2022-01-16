@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>495cc06f-6a77-4536-801e-0113d798950f.SCHEMA:ClassroomsDB.public</OriginalElement>
+  <nodes>
+    <node x="250.4545454545455" y="113.90909090909088">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Classrooms</node>
+    <node x="523.9545454545455" y="113.90909090909088">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Types</node>
+    <node x="55.8636363636364" y="326.81818181818176">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.ClassroomItem</node>
+    <node x="257.40909090909093" y="348.81818181818176">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.__EFMigrationsHistory</node>
+    <node x="499.9545454545455" y="282.81818181818176">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Resrvations</node>
+    <node x="55.8636363636364" y="113.90909090909088">495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Items</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Resrvations" target="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Classrooms" relationship="REFERENCES">
+      <point x="0.0" y="-71.5" />
+      <point x="569.9545454545455" y="270.72727272727263" />
+      <point x="324.4545454545455" y="270.72727272727263" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.ClassroomItem" target="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Classrooms" relationship="REFERENCES">
+      <point x="34.99999999999997" y="-49.5" />
+      <point x="160.86363636363637" y="273.0" />
+      <point x="295.9771539436173" y="273.0" />
+      <point x="-28.477391510928214" y="58.26801552106443" />
+    </edge>
+    <edge source="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.ClassroomItem" target="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Items" relationship="REFERENCES">
+      <point x="-35.00000000000003" y="-49.5" />
+      <point x="90.86363636363637" y="273.0" />
+      <point x="115.8636363636364" y="273.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Classrooms" target="495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.Types" relationship="REFERENCES">
+      <point x="73.34079030725366" y="-42.64107538802651" />
+      <point x="524.6476678808996" y="131.76801552106437" />
+      <point x="524.6476678808996" y="190.90909090909088" />
+      <point x="0.0" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="2.1999999999999997" showDependencies="false" x="452.0" y="285.0" />
+  <SelectedNodes>
+    <node>495cc06f-6a77-4536-801e-0113d798950f.TABLE:ClassroomsDB.public.__EFMigrationsHistory</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
